@@ -1,11 +1,16 @@
-import React from 'react'
-import Layout from '../layouts'
-const index = () => {
-  return (
-    <div>
-      <h1>index</h1>
-    </div>
-  )
-}
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import Layout from "../components/layouts";
 
-export default index
+const index = () => {
+  let router = useRouter();
+  useEffect(() => {
+    router.push("/user");
+  }, []);
+};
+
+export default index;
+
+index.getLayout = (page) => {
+  return <Layout title="Loading...">{page}</Layout>;
+};
