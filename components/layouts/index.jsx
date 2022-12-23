@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Drawer from "../Drawer";
 import Header from "../Header";
 
-const index = ({ children, title }) => {
+const Layout = ({ children, title }) => {
   const [toggle, setToggle] = useState(true);
 
   return (
@@ -22,4 +22,4 @@ const index = ({ children, title }) => {
   );
 };
 
-export default index;
+export default Layout;

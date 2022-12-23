@@ -2,15 +2,16 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import Layout from "../components/layouts";
 
-const index = () => {
+const Loading = () => {
   let router = useRouter();
   useEffect(() => {
     router.push("/user");
   }, []);
+  return <p>Loading...</p>
 };
 
-export default index;
+export default Loading;
 
-index.getLayout = (page) => {
+Loading.getLayout = (page) => {
   return <Layout title="Loading...">{page}</Layout>;
 };
