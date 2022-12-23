@@ -1,0 +1,4 @@
+.drawer__container {
+  height: calc(100vh - 80px);
+  min-width: fit-content;
+}
