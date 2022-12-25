@@ -10,6 +10,7 @@ const Post = () => {
   const [data, setData] = useState([]);
   const [isGetLoading, setIsGetLoading] = useState(false);
   const [toggle, setToggle] = useState("");
+  const [editIndex, setEditIndex] = useState(-1)
   const [titleInput, setTitleInput] = useState("");
   const [bodyInput, setBodyInput] = useState("");
 
@@ -57,6 +58,7 @@ const Post = () => {
     setToggle("edit");
     setTitleInput(data[index].title);
     setBodyInput(data[index].body);
+    setEditIndex(index)
   };
 
   const deletePost = (index) => {
@@ -65,14 +67,14 @@ const Post = () => {
     setData(tempData);
   };
 
-  const editPost = (index) => {
+  const editPost = () => {
     let tempData = [...data];
     let body = {
       title: titleInput,
       body: bodyInput,
       userId: 501,
     };
-    tempData.splice(index, 1, body);
+    tempData.splice(editIndex, 1, body);
     setData(tempData);
     setTitleInput("");
     setBodyInput("");
