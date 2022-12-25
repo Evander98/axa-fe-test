@@ -1,17 +1,18 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import Layout from "../components/layouts";
+import Loading from "../components/Loading";
 
-const Loading = () => {
+const Redirect = () => {
   let router = useRouter();
   useEffect(() => {
     router.push("/user");
   }, []);
-  return <p>Loading...</p>
+  return <Loading/>
 };
 
-export default Loading;
+export default Redirect;
 
-Loading.getLayout = (page) => {
+Redirect.getLayout = (page) => {
   return <Layout title="Loading...">{page}</Layout>;
 };
