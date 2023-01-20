@@ -1,15 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
 import Layout from "../../components/layouts";
 import Loading from "../../components/Loading";
+import Pagination from "../../components/Pagination";
 import Table from "../../components/Table";
 
 const User = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [number, setNumber] = useState(0);
+  const [isNext, setIsNext] = useState(true);
 
   useEffect(() => {
     fetch();
@@ -30,10 +30,12 @@ const User = () => {
         address: item.address.city,
       }));
 
-      setNumber(Math.ceil(tempItems.length / perPage));
-      tempItems.splice(perPage * currentPage, tempItems.length);
-
-      setItems(tempItems);
+      let splicedItems = tempItems.splice(
+        perPage * currentPage - perPage,
+        perPage
+      );
+      perPage * currentPage >= data.length ? setIsNext(false) : setIsNext(true);
+      setItems(splicedItems);
     }
 
     setIsLoading(false);
@@ -46,18 +48,10 @@ const User = () => {
       <p className="headline--large mb-11">User List</p>
       <div className="w-full">
         {items.length ? <Table items={items} action={true} /> : <p>No Data</p>}
-        <div className="flex items-center justify-between mt-4">
-          <Button
-            label="Prev Page"
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          />
-          <p>{currentPage}</p>
-          <Button
-            label="Next Page"
-            onClick={() => setCurrentPage(currentPage + 1)}
-          />
-        </div>
+        <Pagination
+          paging={{currentPage, setCurrentPage}}
+          isNext={isNext}
+        />
       </div>
     </div>
   );
